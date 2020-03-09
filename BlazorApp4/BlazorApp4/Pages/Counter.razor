@@ -31,15 +31,19 @@
 
 			var document = new PdfDocument();
 			var page = document.AddPage();
-			
+			//Current fileName: Operation is not supported on this platform.
+
 			//var gfx = XGraphics.FromPdfPage(page);
 			//var font = new XFont("times", 20, XFontStyle.Bold);
 
 			//gfx.DrawString("Hello World!", font, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.Center);
 			MemoryStream memoryStream = new MemoryStream();
+			// Encoding 1252 data could not be found. Make sure you have correct international codeset assembly installed and enabled.
 			document.Save(memoryStream, true);
 
-			/*	var converter = new BasicConverter(new PdfTools());
+			/*	Other lib Case
+			 *	can't install dependences 
+			 	var converter = new BasicConverter(new PdfTools());
 				doc = new HtmlToPdfDocument()
 				{
 					GlobalSettings = {
@@ -57,14 +61,13 @@
 				}
 				};
 
-
 				fileName = doc.GlobalSettings.Out;
 				JS.SaveAs("Sample.pdf", converter.Convert(doc));*/
+
 				JS.SaveAs("Sample.pdf", memoryStream.ToArray());
 		}
 		catch (Exception e)
 		{
-
 			fileName = e.Message;
 		}
 	}
